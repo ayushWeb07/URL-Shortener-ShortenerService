@@ -8,15 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@biomejs/biome':
-        specifier: ^2.5.6
-        version: 2.5.6
-      '@types/express':
-        specifier: ^5.0.6
-        version: 5.0.6
-      '@types/node':
-        specifier: ^26.1.2
-        version: 26.1.2
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -26,6 +17,25 @@ importers:
       http-status-codes:
         specifier: ^2.3.0
         version: 2.3.0
+      winston:
+        specifier: ^3.19.0
+        version: 3.19.0
+      winston-daily-rotate-file:
+        specifier: ^5.0.0
+        version: 5.0.0(winston@3.19.0)
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
+    devDependencies:
+      '@biomejs/biome':
+        specifier: ^2.5.6
+        version: 2.5.6
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
+      '@types/node':
+        specifier: ^26.1.2
+        version: 26.1.2
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -38,15 +48,6 @@ importers:
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
-      winston:
-        specifier: ^3.19.0
-        version: 3.19.0
-      winston-daily-rotate-file:
-        specifier: ^5.0.0
-        version: 5.0.0(winston@3.19.0)
-      zod:
-        specifier: ^4.4.3
-        version: 4.4.3
 
 packages:
 
