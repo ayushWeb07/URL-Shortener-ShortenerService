@@ -83,7 +83,13 @@ const urlController = {
 		}),
 
 	findUrlByShortUrl: publicProcedure
-		.input(z.coerce.string().min(1).max(10).lowercase())
+		.input(
+			z.coerce
+				.string()
+				.min(1)
+				.max(10)
+				.regex(/^[0-9A-Za-z]+$/),
+		)
 		.query(async (opts) => {
 			try {
 				const { input } = opts;
@@ -114,13 +120,17 @@ const urlController = {
 		}),
 
 	deleteUrlById: publicProcedure
-		.input(z.coerce.number().int().nonnegative())
+		.input(
+			z.object({
+				id: z.number().int().nonnegative(),
+			}),
+		)
 		.mutation(async (opts) => {
 			try {
 				const { input } = opts;
 
 				// call the url service
-				await urlService.deleteUrlById(input);
+				await urlService.deleteUrlById(input.id);
 
 				return {
 					message: "Successfully deleted the url by id",
