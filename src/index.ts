@@ -1,9 +1,18 @@
-import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import { appRouter } from "./trpc/routers/_app.ts";
 import { serverConfig } from "./config/index.ts";
+import express from "express";
+import * as trpcExpress from "@trpc/server/adapters/express";
+import { createContext } from "./trpc/context.ts";
 
-const server = createHTTPServer({
-	router: appRouter,
-});
+// create the express app
+const app = express();
 
-server.listen(serverConfig.PORT);
+app.use(
+	"/trpc",
+	trpcExpress.createExpressMiddleware({
+		router: appRouter,
+		createContext,
+	}),
+);
+
+app.listen(serverConfig.PORT);
