@@ -18,20 +18,22 @@ class RedisConnection {
 			});
 
 			this.connection.on("connect", () => {
-				logger.info("Connecting to Redis...")
-			})
+				logger.info("Connecting to Redis...");
+			});
 
 			this.connection.on("ready", () => {
-				logger.info("Successfully connected to Redis")
-			})
+				logger.info("Successfully connected to Redis");
+			});
 
 			this.connection.on("error", (error) => {
-				logger.error(`Something went wrong while connecting to redis: ${error}`)
-			})
+				logger.error(
+					`Something went wrong while connecting to redis: ${error}`,
+				);
+			});
 
 			this.connection.on("end", () => {
-				logger.info("Redis connection has been closed")
-			})
+				logger.info("Redis connection has been closed");
+			});
 		}
 
 		return this.connection;
