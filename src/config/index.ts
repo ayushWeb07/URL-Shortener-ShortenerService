@@ -2,6 +2,10 @@ import "dotenv/config";
 
 interface ServerConfig {
 	PORT: number;
+	REDIS_SERVER_HOST: string;
+	REDIS_SERVER_PORT: number;
+	REDIS_INCR_COUNTER_KEY: string;
+	BASE_URL: string;
 }
 
 interface DbConfig {
@@ -10,6 +14,10 @@ interface DbConfig {
 
 const serverConfig: ServerConfig = {
 	PORT: Number(process.env.PORT) || 3000,
+	REDIS_SERVER_HOST: process.env.REDIS_SERVER_HOST || "localhost",
+	REDIS_SERVER_PORT: Number(process.env.REDIS_SERVER_PORT) || 6379,
+	REDIS_INCR_COUNTER_KEY: process.env.REDIS_INCR_COUNTER_KEY || "counter",
+	BASE_URL: process.env.BASE_URL || "bit.ly",
 };
 
 const dbConfig: DbConfig = {
