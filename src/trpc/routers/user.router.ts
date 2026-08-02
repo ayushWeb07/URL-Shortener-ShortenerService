@@ -1,10 +1,6 @@
-import { router, publicProcedure } from "../context.ts";
-// import { z } from "zod";
+import { router } from "../context.ts";
+import { userController } from "../../controllers/user.controller.ts";
 
-const userRouter = router({
-	list: publicProcedure.query(() => {
-		return [];
-	}),
-});
+const userRouter = router(userController);
 
 export { userRouter };

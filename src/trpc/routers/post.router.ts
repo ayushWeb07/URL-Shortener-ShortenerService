@@ -1,21 +1,6 @@
-import { router, publicProcedure } from "../context.ts";
-import { z } from "zod";
+import { router } from "../context.ts";
+import { postController } from "../../controllers/post.controller.ts";
 
-const postRouter = router({
-	create: publicProcedure
-		.input(
-			z.object({
-				title: z.string(),
-			}),
-		)
-		.mutation((opts) => {
-			const { input } = opts;
-			return input;
-		}),
-	list: publicProcedure.query(() => {
-		// ...
-		return [];
-	}),
-});
+const postRouter = router(postController);
 
 export { postRouter };
