@@ -1,12 +1,12 @@
-import { appRouter, createCaller } from "./trpc/routers/_app.ts";
+import { appRouter } from "./trpc/routers/_app.ts";
 import { serverConfig } from "./config/index.ts";
 import express from "express";
-import type { Request, Response } from "express";
 
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { createContext } from "./trpc/context.ts";
 import { validateRequestUrlParams } from "./validators/request.validator.ts";
 import { z } from "zod";
+import * as redirectionController from "./controllers/redirection.controller.ts";
 
 // create the express app
 const app = express();
@@ -32,20 +32,7 @@ app.get(
 				.regex(/^[0-9A-Za-z]+$/),
 		}),
 	),
-	async (req: Request, res: Response) => {
-		try {
-			const { shortUrl } = req.params;
-
-			const caller = createCaller({});
-
-			// call the trpc function
-			const urlData = await caller.url.findUrlByShortUrl(shortUrl);
-
-			res.redirect(urlData.url);
-		} catch (error) {
-			throw error;
-		}
-	},
+	redirectionController.redirectShortUrl,
 );
 
 app.listen(serverConfig.PORT);
