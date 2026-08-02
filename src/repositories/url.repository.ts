@@ -1,5 +1,5 @@
 import { logger } from "../config/logger.config.ts";
-import {
+import type {
 	CreateUrlDto,
 	DeleteUrlByIdDto,
 	FindUrlByIdDto,
@@ -15,7 +15,7 @@ import { urls } from "../database/schemas/url.ts";
 import { eq } from "drizzle-orm";
 
 // create url
-const createUrl = async (urlData: CreateUrlDto) => {
+const createUrl = async (urlData: CreateUrlDto): Promise<void> => {
 	try {
 		// create the new url
 		const [newUrl] = await db
@@ -40,7 +40,15 @@ const createUrl = async (urlData: CreateUrlDto) => {
 };
 
 // find all urls
-const findAllUrls = async () => {
+const findAllUrls = async (): Promise<
+	{
+		id: number;
+		originalUrl: string;
+		shortUrl: string;
+		createdAt: Date;
+		updatedAt: Date;
+	}[]
+> => {
 	try {
 		const allUrls = await db.select().from(urls);
 
@@ -60,7 +68,15 @@ const findAllUrls = async () => {
 };
 
 // find url by id
-const findUrlById = async (urlData: FindUrlByIdDto) => {
+const findUrlById = async (
+	urlData: FindUrlByIdDto,
+): Promise<{
+	id: number;
+	originalUrl: string;
+	shortUrl: string;
+	createdAt: Date;
+	updatedAt: Date;
+}> => {
 	try {
 		const [url] = await db.select().from(urls).where(eq(urls.id, urlData.id));
 
@@ -91,7 +107,15 @@ const findUrlById = async (urlData: FindUrlByIdDto) => {
 };
 
 // find by short url
-const findUrlByShortUrl = async (urlData: FindUrlByShortUrlDto) => {
+const findUrlByShortUrl = async (
+	urlData: FindUrlByShortUrlDto,
+): Promise<{
+	id: number;
+	originalUrl: string;
+	shortUrl: string;
+	createdAt: Date;
+	updatedAt: Date;
+}> => {
 	try {
 		const [url] = await db
 			.select()
@@ -125,7 +149,7 @@ const findUrlByShortUrl = async (urlData: FindUrlByShortUrlDto) => {
 };
 
 // delete url by id
-const deleteUrlById = async (urlData: DeleteUrlByIdDto) => {
+const deleteUrlById = async (urlData: DeleteUrlByIdDto): Promise<void> => {
 	try {
 		const [result] = await db.delete(urls).where(eq(urls.id, urlData.id));
 
