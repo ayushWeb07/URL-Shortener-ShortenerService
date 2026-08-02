@@ -1,4 +1,4 @@
-import { serverConfig } from "./";
+import { serverConfig } from "./index.ts";
 import { Redis } from "ioredis";
 import { logger } from "./logger.config.ts";
 

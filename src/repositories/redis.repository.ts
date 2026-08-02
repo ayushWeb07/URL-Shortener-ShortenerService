@@ -5,7 +5,7 @@ import type {
 	DeleteUrlMappingDto,
 	GetUrlMappingDto,
 } from "../dtos/redis.dto.ts";
-import { serverConfig } from "../config";
+import { serverConfig } from "../config/index.ts";
 
 const redisConn = RedisConnection.getConnectionObject();
 

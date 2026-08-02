@@ -2,7 +2,7 @@
 import * as urlRepository from "../repositories/url.repository.ts";
 import * as redisRepository from "../repositories/redis.repository.ts";
 import { encodeBase62 } from "../utils/base62.util.ts";
-import { serverConfig } from "../config";
+import { serverConfig } from "../config/index.ts";
 
 const createUrl = async (
 	originalUrl: string,
