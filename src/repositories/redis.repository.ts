@@ -18,7 +18,12 @@ const getNewUrlUid = async (): Promise<number> => {
 const addNewUrlMapping = async (
 	urlData: AddNewUrlMappingDto,
 ): Promise<void> => {
-	await redisConn.set(`urls:${urlData.shortUrl}`, urlData.originalUrl);
+	await redisConn.set(
+		`urls:${urlData.shortUrl}`,
+		urlData.originalUrl,
+		"EX",
+		60 * 60 * 24 * 3,
+	);
 };
 
 // get url mapping
