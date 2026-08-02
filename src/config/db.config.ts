@@ -1,15 +1,6 @@
-import mongoose from "mongoose";
-import { dbConfig } from "./index.ts";
-import { logger } from "./logger.config.ts";
+import { drizzle } from "drizzle-orm/mysql2";
+import { dbConfig } from "./";
 
-const connectToDb = async () => {
-	try {
-		await mongoose.connect(dbConfig.DATABASE_URL);
-		logger.info("Successfully connected to the DB");
-	} catch (err) {
-		logger.error(`Something went wrong while connecting to db: ${err}`);
-		throw err;
-	}
-};
+const db = drizzle(dbConfig.DATABASE_URL);
 
-export { connectToDb };
+export { db };

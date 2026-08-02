@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "start": "ts-node src/index.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
     "biome:format": "biome format --write",
     "biome:lint": "biome lint --write",
     "biome:check": "biome check --write"
