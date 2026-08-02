@@ -5,4 +5,21 @@ const createUrlValidator = z.object({
 	shortUrl: z.url(),
 });
 
-export { createUrlValidator };
+const findUrlByIdValidator = z.object({
+	id: z.coerce.number().int().nonnegative(),
+});
+
+const findUrlByShortUrlValidator = z.object({
+	shortUrl: z.url(),
+});
+
+const deleteUrlByIdValidator = z.object({
+	id: z.coerce.number().int().nonnegative(),
+});
+
+export {
+	createUrlValidator,
+	findUrlByIdValidator,
+	findUrlByShortUrlValidator,
+	deleteUrlByIdValidator,
+};
