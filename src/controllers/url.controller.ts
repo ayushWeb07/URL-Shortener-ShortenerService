@@ -2,6 +2,7 @@ import { publicProcedure } from "../trpc/context.ts";
 import { z } from "zod";
 import * as urlService from "../services/url.service.ts";
 import { TRPCError } from "@trpc/server";
+import { NotFoundError } from "../utils/errors/app.error.ts";
 
 const urlController = {
 	createUrl: publicProcedure
@@ -64,6 +65,14 @@ const urlController = {
 					...url,
 				};
 			} catch (error) {
+				if (error instanceof NotFoundError) {
+					throw new TRPCError({
+						code: "NOT_FOUND",
+						message: "Url with such id not found",
+						cause: error,
+					});
+				}
+
 				throw new TRPCError({
 					code: "INTERNAL_SERVER_ERROR",
 					message:
@@ -87,6 +96,14 @@ const urlController = {
 					url,
 				};
 			} catch (error) {
+				if (error instanceof NotFoundError) {
+					throw new TRPCError({
+						code: "NOT_FOUND",
+						message: "Url with such short url not found",
+						cause: error,
+					});
+				}
+
 				throw new TRPCError({
 					code: "INTERNAL_SERVER_ERROR",
 					message:
@@ -109,6 +126,14 @@ const urlController = {
 					message: "Successfully deleted the url by id",
 				};
 			} catch (error) {
+				if (error instanceof NotFoundError) {
+					throw new TRPCError({
+						code: "NOT_FOUND",
+						message: "Url with such id not found",
+						cause: error,
+					});
+				}
+
 				throw new TRPCError({
 					code: "INTERNAL_SERVER_ERROR",
 					message:
