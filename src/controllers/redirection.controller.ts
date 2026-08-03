@@ -10,7 +10,7 @@ const redirectShortUrl = async (req: Request, res: Response) => {
 		const caller = createCaller({});
 
 		// call the trpc function
-		const urlData = await caller.url.findUrlByShortUrl(shortUrl);
+		const urlData = await caller.urls.findUrlByShortUrl(shortUrl);
 
 		res.redirect(urlData.url);
 	} catch (error) {
