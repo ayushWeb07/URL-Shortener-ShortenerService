@@ -39,7 +39,7 @@ const urlController = {
 
 			return {
 				message: "Successfully fetched all the urls",
-				...urls,
+				urls,
 			};
 		} catch (error) {
 			throw new TRPCError({
