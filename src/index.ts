@@ -1,24 +1,28 @@
 import { appRouter } from "./trpc/routers/_app.ts";
 import { serverConfig } from "./config/index.ts";
 import express from "express";
-
+import { logger } from "./config/logger.config.ts";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { createContext } from "./trpc/context.ts";
 import { validateRequestUrlParams } from "./validators/request.validator.ts";
 import { z } from "zod";
 import * as redirectionController from "./controllers/redirection.controller.ts";
+import * as healthController from "./controllers/health.controller.ts";
 
 // create the express app
 const app = express();
 
 // setup the trpc routers
 app.use(
-	"/trpc",
+	"/api/v1/trpc",
 	trpcExpress.createExpressMiddleware({
 		router: appRouter,
 		createContext,
 	}),
 );
+
+// setup the health endpoint
+app.get("/api/v1/health", healthController.checkHealthStatus);
 
 // setup the redirection route
 app.get(
@@ -35,4 +39,6 @@ app.get(
 	redirectionController.redirectShortUrl,
 );
 
-app.listen(serverConfig.PORT);
+app.listen(serverConfig.PORT, () => {
+	logger.info(`Server successfully running...`);
+});
